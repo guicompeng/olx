@@ -32,8 +32,9 @@
 
                             // Adiciona as opções obtidas da requisição
                             $("#modelo").append("<option value=''></option>");
+                         
                             $.each(data, function(index, value) {
-                                $("#modelo").append("<option value='" + value + "'>" + value + "</option>");
+                                $("#modelo").append("<option value='" + value.Codigo_fipe + "'>" + value.Nome + "</option>");
                             });
 
                             // Habilita o campo após a atualização

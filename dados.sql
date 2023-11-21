@@ -46,16 +46,16 @@ INSERT INTO anuncio VALUES (4, "BRA2E22", "444", "MG", "Belo Horizonte", "051", 
 INSERT INTO anuncio VALUES (5, "BRA2E23", "555", "MG", "Belo Horizonte", "071", 70000, "Strada Picape 2020", "2023-11-21", 2020, 2020, 70000, "Disponivel");
 
 -- Fotos
-INSERT INTO foto VALUES ("foto1-1.png", 1);
-INSERT INTO foto VALUES ("foto2-1.png", 1);
-INSERT INTO foto VALUES ("foto1-2.png", 2);
-INSERT INTO foto VALUES ("foto2-2.png", 2);
-INSERT INTO foto VALUES ("foto1-3.png", 3);
-INSERT INTO foto VALUES ("foto2-3.png", 3);
-INSERT INTO foto VALUES ("foto1-4.png", 4);
-INSERT INTO foto VALUES ("foto2-4.png", 4);
-INSERT INTO foto VALUES ("foto1-5.png", 5);
-INSERT INTO foto VALUES ("foto2-5.png", 5);
+INSERT INTO foto VALUES ("foto1-1.png", 1, 1);
+INSERT INTO foto VALUES ("foto2-1.png", 1, 2);
+INSERT INTO foto VALUES ("foto1-2.png", 2, 1);
+INSERT INTO foto VALUES ("foto2-2.png", 2, 2);
+INSERT INTO foto VALUES ("foto1-3.png", 3, 1);
+INSERT INTO foto VALUES ("foto2-3.png", 3, 2);
+INSERT INTO foto VALUES ("foto1-4.png", 4, 1);
+INSERT INTO foto VALUES ("foto2-4.png", 4, 2);
+INSERT INTO foto VALUES ("foto1-5.png", 5, 1);
+INSERT INTO foto VALUES ("foto2-5.png", 5, 2);
 
 
 -- Mensagem

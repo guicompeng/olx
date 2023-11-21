@@ -1,7 +1,7 @@
 <?php
 include 'db_connect.php';
 
-$sql = "SELECT * FROM anuncio";
+$sql = "SELECT *, f.Url as primeira_foto FROM anuncio JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE f.ordem = 1";
 $result = $conn->query($sql);
 ?>
 
@@ -11,6 +11,13 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Listar Anúncios</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Adicionando estilo de contraste aos cards */
+        .card {
+            background-color: #fff; /* Cor de fundo branca */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+        }
+    </style>
 </head>
 <body>
 
@@ -22,8 +29,8 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<div class='col-md-4 mb-4'>
-                        <div class='card'>
-                            <img src='imagem_do_carro.jpg' class='card-img-top' alt='Imagem do Carro'>
+                        <div class='card bg-light'>
+                            <img src='img/{$row['primeira_foto']}' class='card-img-top' alt='Imagem do Carro'>
                             <div class='card-body'>
                                 <h5 class='card-title'>{$row['titulo']}</h5>
                                 <p class='card-text'>

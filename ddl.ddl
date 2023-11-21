@@ -42,7 +42,8 @@ ALTER TABLE categoria ADD CONSTRAINT categoria_pk PRIMARY KEY ( nome );
 
 CREATE TABLE foto (
     url            VARCHAR(200) NOT NULL,
-    anuncio_codigo INTEGER NOT NULL
+    anuncio_codigo INTEGER NOT NULL,
+    ordem          INTEGER NOT NULL
 );
 
 ALTER TABLE foto ADD CONSTRAINT foto_pk PRIMARY KEY ( url );

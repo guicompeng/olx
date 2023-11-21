@@ -93,6 +93,7 @@ CREATE TABLE usuario (
     cpf             VARCHAR(20) NOT NULL,
     primeiro_nome   VARCHAR(50) NOT NULL,
     email           VARCHAR(100) NOT NULL,
+    senha           VARCHAR(100) NOT NULL,
     telefone        VARCHAR(50) NOT NULL,
     sobrenome       VARCHAR(50) NOT NULL,
     data_cadastro   DATE NOT NULL,

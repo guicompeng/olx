@@ -28,6 +28,9 @@ if (isset($_GET['codigo'])) {
 </head>
 <body>
 
+<?php include 'navbar.php'; ?>
+
+
 <div class="container">
     <h2>Detalhes do Anúncio</h2>
 

@@ -11,19 +11,22 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Listar Anúncios</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
     <style>
         /* Adicionando estilo de contraste aos cards */
         .card {
             background-color: #fff; /* Cor de fundo branca */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.); /* Adiciona uma sombra leve */
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2 class="pt-4" >Listagem de Anúncios</h2>
 
+<?php include 'navbar.php'; ?>
+
+<div class="container">
     <div class="row mt-5" >
         <?php
         if ($result->num_rows > 0) {

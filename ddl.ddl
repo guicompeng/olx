@@ -66,7 +66,7 @@ CREATE TABLE marca (
 ALTER TABLE marca ADD CONSTRAINT marca_pk PRIMARY KEY ( nome );
 
 CREATE TABLE mensagem (
-    data_hora             DATE NOT NULL,
+    data_hora             DATETIME NOT NULL,
     usuario_cpf           VARCHAR(20) NOT NULL,
     anuncio_codigo        INTEGER NOT NULL,
     texto                 VARCHAR(500) NOT NULL,

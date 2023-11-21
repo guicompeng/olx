@@ -22,9 +22,9 @@ $result = $conn->query($sql);
 <body>
 
 <div class="container">
-    <h2>Listagem de Anúncios</h2>
+    <h2 class="pt-4" >Listagem de Anúncios</h2>
 
-    <div class="row">
+    <div class="row mt-5" >
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

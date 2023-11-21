@@ -13,7 +13,7 @@ CREATE SCHEMA IF NOT EXISTS `olx` DEFAULT CHARACTER SET utf8 ;
 USE `olx` ;
 
 CREATE TABLE anuncio (
-    codigo             INTEGER NOT NULL,
+    codigo             INT NOT NULL AUTO_INCREMENT,
     placa              VARCHAR(20) NOT NULL,
     usuario_cpf        VARCHAR(20) NOT NULL,
     localizacao_estado VARCHAR(2) NOT NULL,
@@ -21,18 +21,18 @@ CREATE TABLE anuncio (
     modelo_codigo_fipe VARCHAR(50) NOT NULL,
     km                 INTEGER NOT NULL,
     titulo             VARCHAR(50) NOT NULL,
-    data_cadastro      DATE NOT NULL,
     ano_fab            INTEGER NOT NULL,
     ano_modelo         INTEGER NOT NULL,
     preco              FLOAT NOT NULL,
-    status             VARCHAR(50)
+    status             VARCHAR(50),
+    PRIMARY KEY        (codigo)
+
 );
 
 ALTER TABLE anuncio
     ADD CONSTRAINT ANUNCIO_CK_STATUS
     CHECK (Status IN ('DISPONIVEL', 'INDISPONIVEL', 'VENDIDO'))
 ;
-ALTER TABLE anuncio ADD CONSTRAINT anuncio_pk PRIMARY KEY ( codigo );
 
 CREATE TABLE categoria (
     nome VARCHAR(50) NOT NULL

@@ -3,7 +3,6 @@ include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $categoria = $_POST['categoria'];
-    $marca = $_POST['marca'];
     $modelo = $_POST['modelo'];
     $placa = $_POST['placa'];
     $localizacao_estado = $_POST['localizacao_estado'];
@@ -15,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $preco = $_POST['preco'];
 
     // Inserir no banco de dados
-    $sql = "INSERT INTO anuncio (categoria, marca, modelo, placa, localizacao_estado, localizacao_cidade, km, titulo, ano_fab, ano_modelo, preco)
-            VALUES ('$categoria', '$marca', '$modelo', '$placa', '$localizacao_estado', '$localizacao_cidade', '$km', '$titulo', '$ano_fab', '$ano_modelo', '$preco')";
+    $sql = "INSERT INTO anuncio (MODELO_Codigo_fipe, placa, localizacao_estado, localizacao_cidade, km, titulo, ano_fab, ano_modelo, preco)
+            VALUES ('$modelo', '$placa', '$localizacao_estado', '$localizacao_cidade', '$km', '$titulo', '$ano_fab', '$ano_modelo', '$preco')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Anúncio cadastrado com sucesso!";

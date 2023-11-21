@@ -39,11 +39,11 @@ INSERT INTO localizacao VALUES ("BA", "Salvador");
 
 
 -- Anuncios
-INSERT INTO anuncio VALUES (1, "BRA2E19", "111", "MG", "Belo Horizonte", "021", 30000, "Yaris Sedan 2020", "2023-11-21", 2020, 2021, 85000, "Disponivel");
-INSERT INTO anuncio VALUES (2, "BRA2E20", "222", "SP", "São Paulo", "031", 40000, "KA Sedan 2019", "2023-11-21", 2019, 2019, 55000, "Disponivel");
-INSERT INTO anuncio VALUES (3, "BRA2E21", "333", "MG", "Belo Horizonte", "108", 50000, "Onix Hatch 2020", "2023-11-21", 2020, 2020, 65000, "Disponivel");
-INSERT INTO anuncio VALUES (4, "BRA2E22", "444", "MG", "Belo Horizonte", "051", 60000, "Gol Hatch 2014", "2023-11-21", 2014, 2014, 40000, "Disponivel");
-INSERT INTO anuncio VALUES (5, "BRA2E23", "555", "MG", "Belo Horizonte", "071", 70000, "Strada Picape 2020", "2023-11-21", 2020, 2020, 70000, "Disponivel");
+INSERT INTO anuncio VALUES (1, "BRA2E19", "111", "MG", "Belo Horizonte", "021", 30000, "Yaris Sedan 2020", 2020, 2021, 85000, "Disponivel");
+INSERT INTO anuncio VALUES (2, "BRA2E20", "222", "SP", "São Paulo", "031", 40000, "KA Sedan 2019", 2019, 2019, 55000, "Disponivel");
+INSERT INTO anuncio VALUES (3, "BRA2E21", "333", "MG", "Belo Horizonte", "108", 50000, "Onix Hatch 2020", 2020, 2020, 65000, "Disponivel");
+INSERT INTO anuncio VALUES (4, "BRA2E22", "444", "MG", "Belo Horizonte", "051", 60000, "Gol Hatch 2014", 2014, 2014, 40000, "Disponivel");
+INSERT INTO anuncio VALUES (5, "BRA2E23", "555", "MG", "Belo Horizonte", "071", 70000, "Strada Picape 2020", 2020, 2020, 70000, "Disponivel");
 
 -- Fotos
 INSERT INTO foto VALUES ("foto1-1.png", 1, 1);

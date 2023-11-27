@@ -60,6 +60,14 @@ $result = $conn->query($sql);
                 </button>
             </div>";
     }
+    if (isset($_GET['exclusao_sucesso']) && $_GET['exclusao_sucesso'] == 'true') {
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                Anúncio excluído com sucesso!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>";
+    }
     echo "<h5 class='mt-3'>Seus anúncios</h5>";
 
     ?>
@@ -82,7 +90,7 @@ $result = $conn->query($sql);
                                     <strong>Ano Mod.:</strong> {$row['ano_modelo']}
                                 </p>
                                 <a href='visualizar_anuncio.php?codigo={$row['codigo']}' class='btn btn-primary'>Visualizar</a>
-                                <a href='editar_anuncio.php?codigo={$row['codigo']}' class='btn btn-warning'>Editar</a>
+                                <a href='cadastrar_anuncio.php?codigo={$row['codigo']}' class='btn btn-warning'>Editar</a>
                                 <a href='excluir_anuncio.php?codigo={$row['codigo']}' class='btn btn-danger'>Excluir</a>
                             </div>
                         </div>

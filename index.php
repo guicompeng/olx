@@ -2,10 +2,10 @@
 include 'db_connect.php';
 
 // utilizamos o left join aqui
-$sql = "SELECT *, f.Url as primeira_foto FROM anuncio LEFT JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE f.ordem = 1 OR f.ordem is NULL";
+$sql = "SELECT *, f.Url as primeira_foto FROM anuncio LEFT JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE f.ordem = 1 OR f.ordem is NULL AND Status = 'Disponivel'";
 $result = $conn->query($sql);
 
-$sqlTotalAnuncios = "SELECT sum(Codigo) as totalAnuncios FROM anuncio WHERE `Status` = 'Disponivel'";
+$sqlTotalAnuncios = "SELECT count(Codigo) as totalAnuncios FROM anuncio WHERE `Status` = 'Disponivel'";
 $resultTotalAnuncios = $conn->query($sqlTotalAnuncios);
 ?>
 

@@ -68,7 +68,7 @@ $result = $conn->query($sql);
                 </button>
             </div>";
     }
-    echo "<h5 class='mt-3'>Seus anúncios</h5>";
+    echo "<h5 class='mt-3'>Meus anúncios</h5>";
 
     ?>
 

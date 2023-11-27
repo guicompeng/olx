@@ -15,7 +15,7 @@
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">
+                            <button class="btn btn-secondary text-white" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -27,6 +27,12 @@
                 <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Anunciar</a>
                 <a class="btn btn-secondary ml-2" href="meus_anuncios.php">Meus Anúncios</a>
                 <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Informações</a>
+            </li>
+
+            <li class="nav-item">
+                <span class="navbar-text ml-2 text-white">
+                    <i class="fas fa-user"></i> Bem-vindo Guilherme
+                </span>
             </li>
         </ul>
     </div>

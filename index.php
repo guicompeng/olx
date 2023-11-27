@@ -1,8 +1,12 @@
 <?php
 include 'db_connect.php';
 
-$sql = "SELECT *, f.Url as primeira_foto FROM anuncio JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE f.ordem = 1";
+// utilizamos o left join aqui
+$sql = "SELECT *, f.Url as primeira_foto FROM anuncio LEFT JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE f.ordem = 1 OR f.ordem is NULL";
 $result = $conn->query($sql);
+
+$sqlTotalAnuncios = "SELECT sum(Codigo) as totalAnuncios FROM anuncio WHERE `Status` = 'Disponivel'";
+$resultTotalAnuncios = $conn->query($sqlTotalAnuncios);
 ?>
 
 <!DOCTYPE html>
@@ -27,13 +31,18 @@ $result = $conn->query($sql);
 <?php include 'navbar.php'; ?>
 
 <div class="container">
-    <div class="row mt-5" >
+    <?php
+    $total = $resultTotalAnuncios->fetch_assoc()['totalAnuncios'];
+    echo "<h5 class='mt-3'>Exibindo o total de $total anúncios</h5>";
+    ?>
+    <div class="row mt-4" >
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $foto = $row['primeira_foto'] ? $row['primeira_foto'] : 'sem-foto.jpg';
                 echo "<div class='col-md-4 mb-4'>
                         <div class='card bg-light'>
-                            <img src='img/{$row['primeira_foto']}' class='card-img-top' alt='Imagem do Carro'>
+                            <img src='img/{$foto}' class='card-img-top' alt='Imagem do Carro'>
                             <div class='card-body'>
                                 <h5 class='card-title'>{$row['titulo']}</h5>
                                 <p class='card-text'>

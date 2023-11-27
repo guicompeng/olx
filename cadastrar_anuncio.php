@@ -50,6 +50,46 @@
                     $("#modelo").empty().prop("disabled", true);
                 }
             });
+
+            $("#localizacao_estado").change(function() {
+                // Obtém o valor do estado selecionado
+                var estado = $("#localizacao_estado").val();
+
+                // Se o estado estiver definido, faz a requisição AJAX
+                if (estado) {
+                    // Desabilita o campo de cidade enquanto a requisição está em andamento
+                    $("#localizacao_cidade").prop("disabled", true);
+
+                    // Faz a requisição AJAX
+                    $.ajax({
+                        url: "get_cidades.php", // Substitua pelo caminho do arquivo PHP que obtém as cidades
+                        type: "POST",
+                        data: { estado: estado },
+                        dataType: "json",
+                        success: function(data) {
+                            // Limpa o dropdown de cidades
+                            $("#localizacao_cidade").empty();
+
+                            // Adiciona as opções obtidas da requisição
+                            $("#localizacao_cidade").append("<option value=''></option>");
+
+                            $.each(data, function(index, value) {
+                                $("#localizacao_cidade").append("<option value='" + value.Cidade + "'>" + value.Cidade + "</option>");
+                            });
+
+                            // Habilita o campo de cidade após a atualização
+                            $("#localizacao_cidade").prop("disabled", false);
+                        },
+                        error: function() {
+                            // Em caso de erro, habilita o campo de cidade
+                            $("#localizacao_cidade").prop("disabled", false);
+                        }
+                    });
+                } else {
+                    // Se o estado não estiver definido, limpa o dropdown de cidade e desabilita o campo
+                    $("#localizacao_cidade").empty().prop("disabled", true);
+                }
+            });
         });
     </script>
 
@@ -126,7 +166,7 @@ $marcas_result = $conn->query($marcas_query);
             <div class="form-group col-md-6">
                 <label for="modelo">Modelo:</label>
                 <select class="form-control" id="modelo" name="modelo" disabled>
-                    <option value="" selected>Selecione um modelo</option>
+                    <option value="" selected></option>
                 </select>
             </div>
 
@@ -141,13 +181,25 @@ $marcas_result = $conn->query($marcas_query);
             <!-- Localização - Estado -->
             <div class="form-group col-md-6">
                 <label for="localizacao_estado">Estado:</label>
-                <input type="text" class="form-control" id="localizacao_estado" name="localizacao_estado">
+                <select class="form-control" id="localizacao_estado" name="localizacao_estado">
+                    <option value=''></option>
+                    <?php
+                    // Modificado para buscar os estados da tabela Localizacao
+                    $estados_query = "SELECT DISTINCT Estado FROM localizacao";
+                    $estados_result = $conn->query($estados_query);
+                    while ($estado = $estados_result->fetch_assoc()) {
+                        echo "<option value='{$estado['Estado']}'>{$estado['Estado']}</option>";
+                    }
+                    ?>
+                </select>
             </div>
 
             <!-- Localização - Cidade -->
             <div class="form-group col-md-6">
                 <label for="localizacao_cidade">Cidade:</label>
-                <input type="text" class="form-control" id="localizacao_cidade" name="localizacao_cidade">
+                <select class="form-control" id="localizacao_cidade" name="localizacao_cidade" disabled>
+                    <option value="" selected>Selecione um estado primeiro</option>
+                </select>
             </div>
         </div>
 

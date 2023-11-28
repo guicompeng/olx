@@ -161,8 +161,8 @@ $marcas_result = $conn->query($marcas_query);
 
 ?>
 
-<nav class="navbar navbar-expand-lg bg-primary">
-    <a class="navbar-brand text-dark" href="#">OLX Seminovos</a>
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="navbar-brand text-white" href="#">OLX Seminovos</a>
 
     <!-- Botão de menu (mostra ou oculta o menu em telas pequenas) -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,7 +170,7 @@ $marcas_result = $conn->query($marcas_query);
     </button>
 
     <!-- Formulário de Pesquisa -->
-    <div class="collapse navbar-collapse navbar-primary bg-primary" id="navbarNav">
+    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarNav">
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">

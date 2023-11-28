@@ -1,6 +1,6 @@
 
-<nav class="navbar navbar-expand-lg bg-primary">
-    <a class="navbar-brand text-dark" href="#">OLX Seminovos</a>
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="navbar-brand text-white" href="#">OLX Seminovos</a>
 
     <!-- Botão de menu (mostra ou oculta o menu em telas pequenas) -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +8,7 @@
     </button>
 
     <!-- Formulário de Pesquisa -->
-    <div class="collapse navbar-collapse navbar-primary bg-primary" id="navbarNav">
+    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0">
@@ -27,8 +27,8 @@
                 <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Anunciar</a>
                 <a class="btn btn-secondary ml-2" href="meus_anuncios.php">Meus Anúncios</a>
                 <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Informações</a>
+                <a class="btn btn-secondary ml-2" href="admin.php">Configurações</a>
             </li>
-
             <li class="nav-item">
                 <span class="navbar-text ml-2 text-white">
                     <i class="fas fa-user"></i> Bem-vindo Guilherme

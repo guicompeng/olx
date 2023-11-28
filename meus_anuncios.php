@@ -29,8 +29,8 @@ $result = $conn->query($sql);
 <body>
 
 
-<nav class="navbar navbar-expand-lg bg-primary">
-    <a class="navbar-brand text-dark" href="#">OLX Seminovos</a>
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="navbar-brand text-white" href="#">OLX Seminovos</a>
 
     <!-- Botão de menu (mostra ou oculta o menu em telas pequenas) -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@ $result = $conn->query($sql);
     </button>
 
     <!-- Formulário de Pesquisa -->
-    <div class="collapse navbar-collapse navbar-primary bg-primary" id="navbarNav">
+    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarNav">
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">

@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Anunciar</a>
                 <a class="btn btn-secondary ml-2" href="meus_anuncios.php">Meus Anúncios</a>
-                <a class="btn btn-secondary ml-2" href="cadastrar_anuncio.php">Informações</a>
+                <!-- <a class="btn btn-secondary ml-2" href="info.php">Informações</a> -->
                 <a class="btn btn-secondary ml-2" href="admin.php">Configurações</a>
             </li>
             <li class="nav-item">

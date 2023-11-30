@@ -2,8 +2,14 @@
 include 'db_connect.php';
 
 // utilizamos o left join aqui
-$sql = "SELECT * FROM usuario";
+$sql = "SELECT u.*, count(a.codigo) as total_anuncios FROM usuario u LEFT JOIN anuncio a ON u.cpf = a.usuario_cpf group by u.cpf, a.usuario_cpf";
 $result = $conn->query($sql);
+
+$sql = "SELECT u.*, count(a.codigo) as total_anuncios FROM usuario u LEFT JOIN anuncio a ON u.cpf = a.usuario_cpf group by u.cpf, a.usuario_cpf HAVING COUNT(a.codigo) > 0";
+$usuariosComAnuncios = $conn->query($sql);
+
+$sql = "SELECT * FROM (SELECT u.*, count(a.codigo) as total_anuncios FROM usuario u LEFT JOIN anuncio a ON u.cpf = a.usuario_cpf group by u.cpf, a.usuario_cpf HAVING COUNT(a.codigo) > 0) AS subconsulta WHERE sobrenome = 'Assis'";
+$usuariosComAnunciosEtemAssis = $conn->query($sql);
 
 $sql = "SELECT * FROM localizacao";
 $localizacoes = $conn->query($sql);
@@ -41,16 +47,17 @@ $categorias = $conn->query($sql);
         <!-- Botão para cadastrar usuário -->
         <a href="cadastro_usuario.php" class="btn btn-primary mb-3">Cadastrar Usuário</a>
 
+        <h4>Todos os usuários</h4>
+
         <table class="table">
             <thead>
                 <tr>
                     <th>CPF</th>
                     <th>Primeiro nome</th>
                     <th>Sobrenome</th>
-                    <th>Email</th>
                     <th>Telefone</th>
-                    <th>Data de cadastro</th>
                     <th>Data de nascimento</th>
+                    <th>Total de anúncios</th>
                     <th class="text-right"></th>
                 </tr>
             </thead>
@@ -63,10 +70,9 @@ $categorias = $conn->query($sql);
                                 <td>{$row['cpf']}</td>
                                 <td>{$row['primeiro_nome']}</td>
                                 <td>{$row['sobrenome']}</td>
-                                <td>{$row['email']}</td>
                                 <td>{$row['telefone']}</td>
-                                <td>{$row['data_cadastro']}</td>
                                 <td>{$row['data_nascimento']}</td>
+                                <td>{$row['total_anuncios']}</td>
                                 <td class='text-right'>
                                     <a href='cadastro_usuario.php?cpf={$row['cpf']}' class='btn btn-info btn-sm'>Editar</a>
                                     <a href='remover.php?id={$row['id']}' class='btn btn-danger btn-sm'>Remover</a>
@@ -80,6 +86,87 @@ $categorias = $conn->query($sql);
             </tbody>
         </table>
     </div>
+
+    <div>
+        <h4>Usuários que têm algum anúncio ativo</h4>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Primeiro nome</th>
+                    <th>Sobrenome</th>
+                    <th>Telefone</th>
+                    <th>Data de nascimento</th>
+                    <th>Total de anúncios</th>
+                    <th class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Exibir os usuários na tabela
+                if ($usuariosComAnuncios->num_rows > 0) {
+                    while ($row = $usuariosComAnuncios->fetch_assoc()) {
+                        echo "<tr>
+                                <td>{$row['cpf']}</td>
+                                <td>{$row['primeiro_nome']}</td>
+                                <td>{$row['sobrenome']}</td>
+                                <td>{$row['telefone']}</td>
+                                <td>{$row['data_nascimento']}</td>
+                                <td>{$row['total_anuncios']}</td>
+                                <td class='text-right'>
+                                    <a href='cadastro_usuario.php?cpf={$row['cpf']}' class='btn btn-info btn-sm'>Editar</a>
+                                    <a href='remover.php?id={$row['id']}' class='btn btn-danger btn-sm'>Remover</a>
+                                </td>
+                            </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>Nenhum usuário encontrado.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h4>Usuários que têm algum anúncio ativo e sobrenome Assis</h4>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Primeiro nome</th>
+                    <th>Sobrenome</th>
+                    <th>Total de anúncios</th>
+                    <th class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Exibir os usuários na tabela
+                if ($usuariosComAnunciosEtemAssis->num_rows > 0) {
+                    while ($row = $usuariosComAnunciosEtemAssis->fetch_assoc()) {
+                        echo "<tr>
+                                <td>{$row['cpf']}</td>
+                                <td>{$row['primeiro_nome']}</td>
+                                <td>{$row['sobrenome']}</td>
+                                <td>{$row['total_anuncios']}</td>
+                                <td class='text-right'>
+                                    <a href='cadastro_usuario.php?cpf={$row['cpf']}' class='btn btn-info btn-sm'>Editar</a>
+                                    <a href='remover.php?id={$row['id']}' class='btn btn-danger btn-sm'>Remover</a>
+                                </td>
+                            </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>Nenhum usuário encontrado.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <hr class='mt-5'>
 
     <div>
         <h2>Lista de Localização</h2>
@@ -116,6 +203,8 @@ $categorias = $conn->query($sql);
     </div>
 
 
+    <hr>
+    <hr class='mt-5'>
   
     <div>
         <h2>Lista de Marcas</h2>
@@ -150,6 +239,8 @@ $categorias = $conn->query($sql);
     </div>
 
 
+    <hr>
+    <hr class='mt-5'>
       
     <div>
         <h2>Lista de Modelos</h2>
@@ -190,6 +281,9 @@ $categorias = $conn->query($sql);
             </tbody>
         </table>
     </div>
+
+    <hr>
+    <hr class='mt-5'>
 
     <div>
         <h2>Lista de Categorias</h2>

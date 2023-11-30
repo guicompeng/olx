@@ -1,6 +1,7 @@
 <?php
 include 'db_connect.php';
 
+
 if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
 
@@ -17,6 +18,28 @@ if (isset($_GET['codigo'])) {
         if ($result_fotos->num_rows > 0) {
             $fotos = $result_fotos->fetch_all(MYSQLI_ASSOC);
         }
+
+        // Obter mensagens do banco de dados
+        $sqlMensagens = "SELECT * FROM mensagem WHERE anuncio_codigo = $codigo AND usuario_cpf = 111";
+        $resultMensagens = $conn->query($sqlMensagens);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Processar o formulário quando o usuário enviar uma mensagem
+            if (isset($_POST['mensagem']) && !empty($_POST['mensagem'])) {
+                $novaMensagem = $_POST['mensagem'];
+    
+                // Inserir a nova mensagem no banco de dados
+                $dataAtual = date("Y-m-d H:i:s");
+                $inserirMensagem = "INSERT INTO mensagem (data_hora, anuncio_codigo, usuario_cpf, enviado_pelo_vendedor, texto) VALUES ('$dataAtual', '$codigo', '111', 0, '$novaMensagem')";
+                if ($conn->query($inserirMensagem) === TRUE) {
+                    // Atualizar a lista de mensagens após a inserção
+                    $resultMensagens = $conn->query($sqlMensagens);
+                } else {
+                    echo "Erro ao enviar mensagem: " . $conn->error;
+                }
+            }
+        }
+
     } else {
         echo "Anúncio não encontrado";
         exit();
@@ -42,22 +65,49 @@ if (isset($_GET['codigo'])) {
     <h2>Detalhes do Anúncio</h2>
 
     <?php if (isset($fotos) && count($fotos) > 0) : ?>
-        <div id="carouselExample" class="carousel slide" data-ride="carousel" style="max-width: 50%;">
-            <div class="carousel-inner">
-                <?php foreach ($fotos as $index => $foto) : ?>
-                    <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
-                        <img src="img/<?php echo $foto['url']; ?>" class="d-block w-100" style="height: auto;" alt="Foto <?php echo $index + 1; ?>">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="carouselExample" class="carousel slide" data-ride="carousel" style="max-width: 100%;">
+                    <div class="carousel-inner">
+                        <?php foreach ($fotos as $index => $foto) : ?>
+                            <div class="carousel-item <?php echo ($index === 0) ? 'active' : ''; ?>">
+                                <img src="img/<?php echo $foto['url']; ?>" class="d-block w-100" style="height: auto;" alt="Foto <?php echo $index + 1; ?>">
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a>
+                </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
-            </a>
+            <div class="col-md-6">
+                <div style="height: 230px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+                    <?php
+                    if ($resultMensagens->num_rows > 0) {
+                        while ($mensagem = $resultMensagens->fetch_assoc()) {
+                            echo '<p>';
+                            echo ($mensagem['enviado_pelo_vendedor'] ? 'Vendedor: ' : 'Comprador: ');
+                            echo $mensagem['texto'];
+                            echo '</p>';
+                        }
+                    } else {
+                        echo '<p>Nenhuma mensagem ainda.</p>';
+                    }
+                    ?>
+                </div>
+                <form method="post" action="">
+                    <div class="form-group">
+                        <label for="mensagem">Nova Mensagem:</label>
+                        <textarea class="form-control" id="mensagem" name="mensagem" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="enviar_mensagem">Enviar Mensagem</button>
+                </form>
+            </div>
         </div>
     <?php endif; ?>
 

@@ -59,3 +59,9 @@ INSERT INTO foto VALUES ("foto2-5.png", 5, 2);
 
 
 -- Mensagem
+INSERT INTO mensagem VALUES ("2023-11-30 17:20:00", "111", 2, "Olá, está disponível ainda?", 0);
+INSERT INTO mensagem VALUES ("2023-11-30 17:21:00", "111", 2, "Olá, sim", 1);
+INSERT INTO mensagem VALUES ("2023-11-30 17:22:00", "111", 2, "Posso olhar?", 0);
+INSERT INTO mensagem VALUES ("2023-11-30 17:23:00", "111", 2, "Pode sim", 1);
+INSERT INTO mensagem VALUES ("2023-11-30 17:24:00", "111", 2, "Onde encontraremos?", 0);
+

@@ -303,7 +303,7 @@ $marcas_result = $conn->query($marcas_query);
 
         <input type="hidden" name="codigo" value="<?php echo $anuncio_codigo; ?>">
 
-        <button type="submit" class="btn btn-primary"><?php echo isset($_GET['codigo']) ? 'Atualizar' : 'Salvar'; ?></button>
+        <button type="submit" class="btn btn-primary"><?php echo isset($_GET['codigo']) ? 'Atualizar' : 'Próximo'; ?></button>
 
     </form>
 </div>

@@ -62,7 +62,7 @@ if (isset($_GET['codigo'])) {
 <?php include 'navbar.php'; ?>
 
 <div class="container">
-    <h2>Detalhes do Anúncio</h2>
+    <h2 class='mt-3'>Detalhes do Anúncio</h2>
 
     <?php if (isset($fotos) && count($fotos) > 0) : ?>
         <div class="row">
@@ -111,7 +111,7 @@ if (isset($_GET['codigo'])) {
         </div>
     <?php endif; ?>
 
-    <dl class="row">
+    <dl class="row mt-3">
         <dt class="col-sm-3">Preço:</dt>
         <dd class="col-sm-9"><?php echo $anuncio['preco']; ?></dd>
 

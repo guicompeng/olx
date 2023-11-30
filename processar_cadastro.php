@@ -18,7 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             VALUES ('111', '$modelo', '$placa', '$localizacao_estado', '$localizacao_cidade', '$km', '$titulo', '$ano_fab', '$ano_modelo', '$preco', 'Disponivel')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: meus_anuncios.php?cadastro_sucesso=true");
+        $last_id = $conn->insert_id;  // Obter o ID inserido recentemente
+
+        // header("Location: meus_anuncios.php?cadastro_sucesso=true");
+        header("Location: upload_fotos.php?codigo=" . $last_id); // Use o ID obtido
         exit();
     } else {
         echo "Erro ao cadastrar o anúncio: " . $conn->error;

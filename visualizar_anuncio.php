@@ -5,7 +5,7 @@ include 'db_connect.php';
 if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
 
-    $sql = "SELECT * FROM anuncio WHERE codigo = $codigo";
+    $sql = "SELECT *, CONCAT(u.primeiro_nome, ' ', sobrenome) as primeiro_nome FROM anuncio a join usuario u ON a.usuario_cpf = u.cpf WHERE codigo = $codigo ";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -112,6 +112,15 @@ if (isset($_GET['codigo'])) {
     <?php endif; ?>
 
     <dl class="row">
+        <dt class="col-sm-3">Preço:</dt>
+        <dd class="col-sm-9"><?php echo $anuncio['preco']; ?></dd>
+
+        <dt class="col-sm-3">Nome do vendedor:</dt>
+        <dd class="col-sm-9"><?php echo $anuncio['primeiro_nome']; ?></dd>
+
+        <dt class="col-sm-3">Título:</dt>
+        <dd class="col-sm-9"><?php echo $anuncio['titulo']; ?></dd>
+
         <dt class="col-sm-3">Código:</dt>
         <dd class="col-sm-9"><?php echo $anuncio['codigo']; ?></dd>
 
@@ -124,11 +133,12 @@ if (isset($_GET['codigo'])) {
         <dt class="col-sm-3">KM:</dt>
         <dd class="col-sm-9"><?php echo $anuncio['km']; ?></dd>
 
-        <dt class="col-sm-3">Ano Fab.:</dt>
+        <dt class="col-sm-3">Ano Fab.</dt>
         <dd class="col-sm-9"><?php echo $anuncio['ano_fab']; ?></dd>
 
-        <dt class="col-sm-3">Ano Mod.:</dt>
+        <dt class="col-sm-3">Ano Mod.</dt>
         <dd class="col-sm-9"><?php echo $anuncio['ano_modelo']; ?></dd>
+
     </dl>
 </div>
 

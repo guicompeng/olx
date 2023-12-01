@@ -34,6 +34,16 @@ ALTER TABLE anuncio
     CHECK (Status IN ('DISPONIVEL', 'INDISPONIVEL', 'VENDIDO'))
 ;
 
+ALTER TABLE anuncio
+    ADD CONSTRAINT ANUNCIO_CK_PRECO
+    CHECK (preco > 0)
+;
+
+ALTER TABLE anuncio
+    ADD CONSTRAINT ANUNCIO_CK_KM
+    CHECK (km > 0)
+;
+
 CREATE TABLE categoria (
     nome VARCHAR(50) NOT NULL
 );
@@ -102,6 +112,9 @@ CREATE TABLE usuario (
 );
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( cpf );
+
+ALTER TABLE usuario
+ADD CONSTRAINT email_unico UNIQUE (email);
 
 ALTER TABLE anuncio
     ADD CONSTRAINT anuncio_localizacao_fk FOREIGN KEY ( localizacao_estado,

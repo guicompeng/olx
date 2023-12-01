@@ -225,8 +225,8 @@ $categorias = $conn->query($sql);
                         echo "<tr>
                                 <td>{$row['nome']}</td>
                                 <td class='text-right'>
-                                    <a href='editar.php?id={$row['id']}' class='btn btn-info btn-sm'>Editar</a>
-                                    <a href='remover.php?id={$row['id']}' class='btn btn-danger btn-sm'>Remover</a>
+                                    <a href='editar.php?nome={$row['nome']}' class='btn btn-info btn-sm'>Editar</a>
+                                    <a href='excluir_marca.php?nome={$row['nome']}' class='btn btn-danger btn-sm'>Remover</a>
                                 </td>
                             </tr>";
                     }
@@ -294,7 +294,6 @@ $categorias = $conn->query($sql);
             <thead>
                 <tr>
                     <th>Nome</th>
-
                     <th class="text-right"></th>
                 </tr>
             </thead>
@@ -304,15 +303,14 @@ $categorias = $conn->query($sql);
                     while ($row = $categorias->fetch_assoc()) {
                         echo "<tr>
                                 <td>{$row['nome']}</td>
-
                                 <td class='text-right'>
-                                    <a href='editar.php?id={$row['id']}' class='btn btn-info btn-sm'>Editar</a>
-                                    <a href='remover.php?id={$row['id']}' class='btn btn-danger btn-sm'>Remover</a>
+                                    <a href='editar.php?nome={$row['nome']}' class='btn btn-info btn-sm'>Editar</a>
+                                    <a href='excluir_categoria.php?nome={$row['nome']}' class='btn btn-danger btn-sm'>Remover</a>
                                 </td>
                             </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>Nenhuma marca encontrado.</td></tr>";
+                    echo "<tr><td colspan='3'>Nenhuma categoria encontrada.</td></tr>";
                 }
                 ?>
             </tbody>

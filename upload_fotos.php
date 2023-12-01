@@ -3,18 +3,16 @@ include 'db_connect.php';
 
 // Altere o CPF para o valor desejado
 $cpfUsuario = '111';
+$codigo = isset($_GET['codigo']) ? $_GET['codigo'] : '';
 
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Processar o upload da foto
-    $anuncioCodigo = $_POST['anuncio_codigo'];
+    $uploadDir = 'img/';
+    $uploadFile = date("Y-m-d H:i:s") . basename($_FILES['foto']['name']);
 
-    $uploadDir = 'uploads/';
-    $uploadFile = $uploadDir . basename($_FILES['foto']['name']);
-
-    if (move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile)) {
+    if (move_uploaded_file($_FILES['foto']['tmp_name'], $uploadDir . $uploadFile)) {
         // Insira no banco de dados
-        $sql = "INSERT INTO foto (anuncio_codigo, url, ordem) VALUES ('$anuncioCodigo', '$uploadFile', 1)";
+        $sql = "INSERT INTO foto (anuncio_codigo, `url`, ordem) VALUES ('$codigo', '$uploadFile', $result->num_rows+1)";
         $conn->query($sql);
     } else {
         echo "Erro ao fazer o upload do arquivo.";
@@ -22,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Consulta novamente para obter as fotos atualizadas
-$sql = "SELECT *, f.Url as primeira_foto FROM anuncio LEFT JOIN foto f ON anuncio.codigo = f.anuncio_codigo WHERE (f.ordem = 1 OR f.ordem IS NULL) AND anuncio.USUARIO_Cpf = '$cpfUsuario'";
+$sql = "SELECT `url` FROM foto where anuncio_codigo = '$codigo'";
 $result = $conn->query($sql);
 ?>
 
@@ -35,10 +33,16 @@ $result = $conn->query($sql);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Adicionando estilo de contraste aos cards */
         .card {
             background-color: #fff; /* Cor de fundo branca */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.); /* Adiciona uma sombra leve */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0); /* Adiciona uma sombra leve */
+            margin-right: 10px; /* Adicione espaçamento entre as imagens */
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
         }
     </style>
 </head>
@@ -69,19 +73,18 @@ $result = $conn->query($sql);
     <!-- Formulário de Upload de Fotos -->
     <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="anuncio_codigo" value="<?php echo $anuncioCodigo; ?>">
-        <input type="file" name="foto" class="form-control-file mt-2" required>
+        <input type="file" name="foto" id="foto" class="form-control-file" required>
         <button type="submit" class="btn btn-success mt-2">Enviar Foto</button>
     </form>
 
     <!-- Fotos existentes -->
-    <?php while ($row = $result->fetch_assoc()) : ?>
-        <div class="card mt-3" style="width: 18rem;">
-            <img src="<?php echo $row['primeira_foto']; ?>" class="card-img-top" alt="Foto do Anúncio">
-            <div class="card-body">
-                <p class="card-text">Descrição do anúncio: <?php echo $row['descricao']; ?></p>
+    <div class="image-container">
+        <?php while ($row = $result->fetch_assoc()) : ?>
+            <div class="card mt-3" style="width: 18rem;">
+                <img src="img/<?php echo $row['url']; ?>" class="card-img-top" alt="Foto do Anúncio">
             </div>
-        </div>
-    <?php endwhile; ?>
+        <?php endwhile; ?>
+    </div>
     
     <!-- Botão para Finalizar -->
     <a href="meus_anuncios.php" class="btn btn-primary mt-3">Finalizar</a>

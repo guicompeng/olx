@@ -5,6 +5,10 @@ include 'db_connect.php';
 $cpfUsuario = '111';
 $codigo = isset($_GET['codigo']) ? $_GET['codigo'] : '';
 
+// Consulta novamente para obter as fotos atualizadas
+$sql = "SELECT `url` FROM foto where anuncio_codigo = '$codigo'";
+$result = $conn->query($sql);
+
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $uploadDir = 'img/';
@@ -14,14 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insira no banco de dados
         $sql = "INSERT INTO foto (anuncio_codigo, `url`, ordem) VALUES ('$codigo', '$uploadFile', $result->num_rows+1)";
         $conn->query($sql);
+        header("Location: upload_fotos.php?codigo=" . $codigo);
     } else {
         echo "Erro ao fazer o upload do arquivo.";
     }
 }
 
-// Consulta novamente para obter as fotos atualizadas
-$sql = "SELECT `url` FROM foto where anuncio_codigo = '$codigo'";
-$result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>

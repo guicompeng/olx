@@ -44,6 +44,10 @@ ALTER TABLE anuncio
     CHECK (km > 0)
 ;
 
+ALTER TABLE anuncio
+    ADD CONSTRAINT ANUNCIO_CK_ANO_FAB
+    CHECK (ano_fab > 1999);
+
 CREATE TABLE categoria (
     nome VARCHAR(50) NOT NULL
 );

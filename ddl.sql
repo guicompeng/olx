@@ -265,6 +265,20 @@ END;
 
 DELIMITER ;
 
+
+DELIMITER //
+CREATE TRIGGER valida_data_modelo
+BEFORE INSERT ON anuncio
+FOR EACH ROW
+BEGIN
+    IF NEW.ano_modelo < NEW.ano_fab THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'A data do modelo não pode ser anterior à data de fabricação';
+    END IF;
+END;
+//
+DELIMITER ;
+
 -- Relatório do Resumo do Oracle SQL Developer Data Modeler:
 --
 -- CREATE TABLE                             8
